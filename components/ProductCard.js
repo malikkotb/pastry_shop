@@ -9,6 +9,7 @@ export default function ProductCard({ product }) {
 
   // gives us access to the setProduct method from the global Zustand store
   const setProduct = useCart((state) => state.setProduct);
+  const addItemToCart = useCart((state) => state.addItemToCart);
 
   const router = useRouter();
 
@@ -24,22 +25,30 @@ export default function ProductCard({ product }) {
     router.push("/product?price_id=" + price_id);
   }
 
+  function handleAddItemToCart() {
+    const newItem = {
+        quantity: 1,
+        price_id: price_id
+    }
+    addItemToCart({ newItem })
+  }
+
   return (
     <div
-      className="flex flex-col shadow hover:shadow-xl cursor-pointer rounded-lg"
+      className="flex flex-col border-none hover:shadow-lg cursor-pointer"
       onClick={onProductClick}
     >
       <img
         src={productInfo.images[0]}
         alt={name}
-        className="w-full h-full object-cover rounded-lg"
+        className="w-full h-full object-cover"
       />
       <div className="flex flex-col gap-2 p-4">
-        <div className="flex items-center justify-between">
-          <h3>{name}</h3>
-          <p>€{cost / 100}</p>
+        <div className="flex flex-col items-center text-center">
+          <p className="text-sm">{name}</p>
+          <p className="text-xs text-slate-700">€{cost / 100}.00</p>
         </div>
-        <p className="text-sm">{description}</p>
+        {/* <p className=" text-xs">{description}</p> */}
       </div>
     </div>
   );
