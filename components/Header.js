@@ -2,28 +2,38 @@
 import React from "react";
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { LiaTimesSolid } from "react-icons/lia";
 import { GiCroissant } from "react-icons/gi";
 import { useState } from "react";
+import useCart from "@/app/(store)/store";
+import Modal from "./Modal";
 
 export default function Header() {
-  const [isOpen, setOpenMenu] = useState(false);
+  const [leftMenuOpen, setOpenLeftMenu] = useState(false);
 
   function toggleSidebar() {
-    setOpenMenu(!isOpen);
+    // left sidebar menu
+    setOpenLeftMenu(!leftMenuOpen);
   }
 
+  const cartItems = useCart((state) => state.cart);
+  const openModal = useCart((state) => state.openModal);
+
   return (
-    <div className="sticky top-0 flex item-center justify-between bg-white border-b border-solid shadow-sm z-50 p-8">
-      {/* Sidebar on smaller screens */}
+    <div className="sticky top-0 flex item-center justify-around bg-white border-b border-solid shadow-sm z-50 p-8">
+      
+      {openModal && <Modal />}
+
+      {/* Sidebar Modal on the left for smaller screens */}
       <div
-        className={`fixed top-0 left-0 w-64 bg-white h-full shadow-md transition-transform transform duration-500 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 left-0 w-80 bg-white h-full shadow-md transition-transform transform duration-500 ${
+          leftMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ zIndex: isOpen ? 100 : 0 }} // Increase z-index when sidebar is open
+        style={{ zIndex: leftMenuOpen ? 100 : 0 }} // Increase z-index when sidebar is open
       >
         <button
-          className="px-6 my-6 transform transition-transform duration-200 hover:rotate-90"
+          className="my-6 transform transition-transform duration-200 px-6 hover:rotate-90"
           onClick={toggleSidebar}
         >
           <LiaTimesSolid />
@@ -38,7 +48,7 @@ export default function Header() {
       </div>
 
       {/* Backdrop */}
-      {isOpen && (
+      {leftMenuOpen && (
         <div
           className="fixed top-0 left-0 w-screen h-screen bg-black opacity-50 z-20"
           onClick={toggleSidebar}
@@ -47,9 +57,9 @@ export default function Header() {
 
       <div className="flex gap-4 text-sm items-center">
         <button onClick={toggleSidebar} className="md:hidden">
-          <RxHamburgerMenu className="text-x " />
+          <RxHamburgerMenu className="text-x" />
         </button>
-        <div className="hidden md:block">
+        <div className="hidden md:inline-flex md:gap-4">
           <Link href={"/"}>
             <h1 className="cursor-pointer hover:scale-105">home</h1>
           </Link>
@@ -72,10 +82,21 @@ export default function Header() {
       </div>
 
       <div className="flex items-center">
-        <div className="md:w-20"></div>
-        <Link href={"/"}>
-          <h1 className="cursor-pointer hover:text-slate-600 text-sm">cart</h1>
-        </Link>
+        <div className=" md:w-36"></div>
+        <div className="relative grid place-items-center cursor-pointer">
+          {cartItems.length > 0 && (
+            <div
+              className="absolute aspect-square h-4 grid place-items-center pointer-events-none top-0 right-0 bg-black rounded-full text-white
+          -translate-y-1/2 translate-x-1/2"
+            >
+              <p className="text-xs">{cartItems.length}</p>
+              <p>0</p>
+            </div>
+          )}
+          <h1 className="hover:scale-105 text-2xl">
+            <PiShoppingCartSimpleThin />
+          </h1>
+        </div>
       </div>
     </div>
   );

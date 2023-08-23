@@ -23,6 +23,8 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
     "daisyui": "^3.5.1"
   }
 }

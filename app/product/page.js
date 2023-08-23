@@ -8,6 +8,7 @@ export default function ProductPage({ searchParams }) {
   const { price_id } = searchParams;
 
   const product = useCart((state) => state.product);
+  const addItemToCart = useCart((state) => state.addItemToCart);
 
   const { cost, productInfo, name, description } = product;
 
@@ -16,6 +17,14 @@ export default function ProductPage({ searchParams }) {
 
   if (!product?.name) {
     window.location.href = "/";
+  }
+
+  function handleAddItemToCart() {
+    const newItem = {
+        quantity: 1,
+        price_id: price_id
+    }
+    addItemToCart({ newItem })
   }
 
   const [showDescription, setShowDescription] = useState(false);
@@ -34,7 +43,7 @@ export default function ProductPage({ searchParams }) {
         <div className="flex flex-col gap-2 p-4 md:ml-4">
           <h3 className="text-2xl">{name}</h3>
           <p className="text-xl text-slate-700">€{cost / 100}.00</p>
-          <button className="bg-black text-white text-sm px-3 py-2">
+          <button onClick={addItemToCart} className="bg-black text-white text-sm px-3 py-2">
             Add to cart
           </button>
           <br />

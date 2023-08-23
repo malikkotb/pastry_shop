@@ -5,7 +5,7 @@ const useCart = create((set, get) => ({
   cart: [],
   product: {},
   
-  openModal: false,
+  openModal: true,
   setOpenModal: () => {
     set((state) => {
         return {

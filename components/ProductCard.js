@@ -9,7 +9,6 @@ export default function ProductCard({ product }) {
 
   // gives us access to the setProduct method from the global Zustand store
   const setProduct = useCart((state) => state.setProduct);
-  const addItemToCart = useCart((state) => state.addItemToCart);
 
   const router = useRouter();
 
@@ -25,13 +24,6 @@ export default function ProductCard({ product }) {
     router.push("/product?price_id=" + price_id);
   }
 
-  function handleAddItemToCart() {
-    const newItem = {
-        quantity: 1,
-        price_id: price_id
-    }
-    addItemToCart({ newItem })
-  }
 
   return (
     <div

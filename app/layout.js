@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
         <Header />
         <div className="flex-1">{children}</div>
         <Footer />
+        <div id="portal"></div>
       </body>
     </html>
   );
