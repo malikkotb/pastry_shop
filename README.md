@@ -2,7 +2,11 @@
 
 **This project is deployed and accessible at [https://tiny-cat-4b4dc8.netlify.app/](https://tiny-cat-4b4dc8.netlify.app/).**
 
-![Pastry Shop E-Commerce](screenshot.png)
+<img width="1092" alt="Screenshot 2023-08-25 at 11 55 54" src="https://github.com/malikkotb/pastry_shop/assets/50169361/6e9f6eb5-cc3a-4922-b094-a9f292dcf19e">
+<img width="1094" alt="Screenshot 2023-08-25 at 11 56 21" src="https://github.com/malikkotb/pastry_shop/assets/50169361/7eebb7b4-e945-4fa3-a38d-f8c77fea3369">
+<img width="1086" alt="Screenshot 2023-08-25 at 11 56 30" src="https://github.com/malikkotb/pastry_shop/assets/50169361/a12d04e7-bce1-4735-8f4e-d308aa670d05">
+
+
 
 This repository contains the source code for a Full-Stack E-Commerce Website designed for a Pastry Shop. The website is built using Next.js, Tailwind CSS, Stripe for payment processing, and Zustand for state management.
 
