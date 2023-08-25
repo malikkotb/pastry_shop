@@ -14,6 +14,7 @@ export default function CartModal({ openModal, closeModal }) {
             quantity: 1
         }
     })
+
     const res = await fetch('/api/checkout', {
         method: 'POST',
         body: JSON.stringify({ lineItems })
@@ -65,7 +66,7 @@ export default function CartModal({ openModal, closeModal }) {
           <p className="">{cartItems.reduce((total, item) => total + (item.quantity * item.cost), 0) / 100}€</p>
         </div>
         <div className="text-center p-4">
-          <button onClick={checkout}  disabled={cartItems.length === 0} className={`bg-black text-white hover:bg-opacity-90 w-full p-2 border cursor-pointer ${cartItems.length === 0 ? 'disabled:cursor-not-allowed' : ''}`}>
+          <button onClick={checkout} disabled={cartItems.length === 0} className={`bg-black text-white hover:bg-opacity-90 w-full p-2 border cursor-pointer ${cartItems.length === 0 ? 'disabled:cursor-not-allowed' : ''}`}>
             Check Out
           </button>
         </div>

@@ -13,7 +13,7 @@ export default function ProductPage({ searchParams }) {
   const { cost, productInfo, name, description } = product;
 
   // the current product: (from Zustand store)
-  console.log(product);
+  // console.log(product);
 
   if (!product?.name) {
     window.location.href = "/";
@@ -22,7 +22,9 @@ export default function ProductPage({ searchParams }) {
   function handleAddItemToCart() {
     const newItem = {
         quantity: 1,
-        price_id: price_id
+        price_id: price_id,
+        name: name,
+        cost: cost
     }
     addItemToCart({ newItem })
   }
@@ -43,7 +45,7 @@ export default function ProductPage({ searchParams }) {
         <div className="flex flex-col gap-2 p-4 md:ml-4">
           <h3 className="text-2xl">{name}</h3>
           <p className="text-xl text-slate-700">€{cost / 100}.00</p>
-          <button onClick={addItemToCart} className="bg-black text-white text-sm px-3 py-2">
+          <button onClick={handleAddItemToCart} className="bg-black text-white text-sm px-3 py-2">
             Add to cart
           </button>
           <br />
