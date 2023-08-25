@@ -1,4 +1,4 @@
-import useCart from "@/app/(store)/store";
+import useCart from "../app/(store)/store";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { LiaTimesSolid } from "react-icons/lia";
