@@ -3,11 +3,11 @@ import React from "react";
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { PiShoppingCartSimpleThin } from "react-icons/pi";
-import { LiaTimesSolid } from "react-icons/lia";
 import { GiCroissant } from "react-icons/gi";
 import { useState } from "react";
 import useCart from "@/app/(store)/store";
-import Modal from "./Modal";
+import LeftSidebar from "./LeftSidebar";
+import CartModal from "./CartModal";
 
 export default function Header() {
   const [leftMenuOpen, setOpenLeftMenu] = useState(false);
@@ -16,45 +16,22 @@ export default function Header() {
     // left sidebar menu
     setOpenLeftMenu(!leftMenuOpen);
   }
-
   const cartItems = useCart((state) => state.cart);
   const openModal = useCart((state) => state.openModal);
-
+  const setOpenModal = useCart((state) => state.setOpenModal);
+  const closeModal = useCart((state) => state.setOpenModal);
   return (
     <div className="sticky top-0 flex item-center justify-around bg-white border-b border-solid shadow-sm z-50 p-8">
+      <LeftSidebar leftMenuOpen={leftMenuOpen} toggleSidebar={toggleSidebar} />{" "}
+      <CartModal openModal={openModal} closeModal={closeModal} />{" "}
       
-      {openModal && <Modal />}
-
-      {/* Sidebar Modal on the left for smaller screens */}
-      <div
-        className={`fixed top-0 left-0 w-80 bg-white h-full shadow-md transition-transform transform duration-500 ${
-          leftMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-        style={{ zIndex: leftMenuOpen ? 100 : 0 }} // Increase z-index when sidebar is open
-      >
-        <button
-          className="my-6 transform transition-transform duration-200 px-6 hover:rotate-90"
-          onClick={toggleSidebar}
-        >
-          <LiaTimesSolid />
-        </button>
-        <ul className="">
-          <li className="px-6 py-2 hover:bg-gray-200 cursor-pointer">home</li>
-          <li className="px-6 py-2 hover:bg-gray-200 cursor-pointer">
-            collections
-          </li>
-          <li className="px-6 py-2 hover:bg-gray-200 cursor-pointer">about</li>
-        </ul>
-      </div>
-
       {/* Backdrop */}
-      {leftMenuOpen && (
+      {(leftMenuOpen || openModal) && (
         <div
-          className="fixed top-0 left-0 w-screen h-screen bg-black opacity-50 z-20"
-          onClick={toggleSidebar}
+          className="fixed top-0 left-0 w-screen h-screen bg-black opacity-25 z-20"
+          onClick={leftMenuOpen ? toggleSidebar : closeModal}
         />
       )}
-
       <div className="flex gap-4 text-sm items-center">
         <button onClick={toggleSidebar} className="md:hidden">
           <RxHamburgerMenu className="text-x" />
@@ -74,13 +51,11 @@ export default function Header() {
         </Link> */}
         </div>
       </div>
-
       <div className="flex flex-grow-1">
         <Link href={"/"}>
           <GiCroissant className="text-5xl hover:scale-105" />
         </Link>
       </div>
-
       <div className="flex items-center">
         <div className=" md:w-36"></div>
         <div className="relative grid place-items-center cursor-pointer">
@@ -93,7 +68,7 @@ export default function Header() {
               <p>0</p>
             </div>
           )}
-          <h1 className="hover:scale-105 text-2xl">
+          <h1 onClick={setOpenModal} className="hover:scale-105 text-2xl">
             <PiShoppingCartSimpleThin />
           </h1>
         </div>
