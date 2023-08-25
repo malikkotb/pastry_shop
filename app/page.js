@@ -1,4 +1,4 @@
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "../components/ProductCard"
 import { FaBeer } from "react-icons/fa";
 import Stripe from "stripe";
 

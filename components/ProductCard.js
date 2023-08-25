@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
-import useCart from "@/app/(store)/store";
+import useCart from "../app/(store)/store";
 
 export default function ProductCard({ product }) {
   const { id: price_id, unit_amount: cost, product: productInfo } = product;

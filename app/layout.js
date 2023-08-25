@@ -1,7 +1,7 @@
-import Header from "@/components/Header";
+import Header from "../components/Header";
 import "./globals.css";
 import { Alice } from "next/font/google";
-import Footer from "@/components/Footer";
+import Footer from "../components/Footer";
 
 const alice = Alice({
   subsets: ['latin'],
