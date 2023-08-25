@@ -5,7 +5,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { GiCroissant } from "react-icons/gi";
 import { useState } from "react";
-import useCart from "@/app/(store)/store";
+import useCart from "../app/(store)/store";
 import LeftSidebar from "./LeftSidebar";
 import CartModal from "./CartModal";
 
