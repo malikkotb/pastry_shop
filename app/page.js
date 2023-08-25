@@ -1,10 +1,9 @@
 import ProductCard from "../components/ProductCard"
-import { FaBeer } from "react-icons/fa";
 import Stripe from "stripe";
 
 // Fetch data from stripe api
 async function getStripeProducts() {
-  const stripe = new Stripe(process.env.STRIPE_SECRET ?? "", {
+  const stripe = new Stripe(process.env.STRIPE_SECRET ?? "pk_test_51NhUmxLg4mTVMhPLtNjN8qgn3icjRZNuGyUqfxViaG323BG45nzdy65J2kIZThtff3D0OH4HDBxNQPkA86OQbNGG00g7OTpFQj", {
     apiVersion: "2023-08-16",
   });
 

@@ -4,12 +4,6 @@ import Stripe from "stripe"
 // the backend route
 export async function POST(request) {
 
-    // if (request.method !== 'POST') {
-    //     return new Response('Error Method not POST', {
-    //         status: 405,
-    //     }); 
-    // }
-
     // if (request.method !== 'POST') { return res.sendStatus(405) }
     const body = await request.json()
 
