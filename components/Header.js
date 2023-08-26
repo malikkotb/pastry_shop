@@ -21,7 +21,7 @@ export default function Header() {
   const setOpenModal = useCart((state) => state.setOpenModal);
   const closeModal = useCart((state) => state.setOpenModal);
   return (
-    <div className="sticky top-0 flex item-center justify-around bg-white border-b border-solid shadow-sm z-50 p-8">
+    <div className="sticky top-0 flex item-center justify-around bg-white border-b border-solid z-50 p-8">
       <LeftSidebar leftMenuOpen={leftMenuOpen} toggleSidebar={toggleSidebar} />{" "}
       <CartModal openModal={openModal} closeModal={closeModal} />{" "}
       
@@ -40,20 +40,18 @@ export default function Header() {
           <Link href={"/"}>
             <h1 className="cursor-pointer hover:scale-105">home</h1>
           </Link>
-          <Link href={"/"}>
-            <h1 className="cursor-pointer hover:scale-105">collections</h1>
+          <Link href={"/products"}>
+            <h1 className="cursor-pointer hover:scale-105">products</h1>
           </Link>
-          <Link href={"/"}>
+          <Link href={"/about"}>
             <h1 className="cursor-pointer hover:scale-105">about</h1>
           </Link>
-          {/* <Link href={"/"}>
-          <h1 className="cursor-pointer hover:scale-105">info</h1>
-        </Link> */}
+        
         </div>
       </div>
       <div className="flex flex-grow-1">
         <Link href={"/"}>
-          <GiCroissant className="text-5xl hover:scale-105" />
+          <GiCroissant className="text-5xl hover:text-yellow-500 transform duration-0" />
         </Link>
       </div>
       <div className="flex items-center">

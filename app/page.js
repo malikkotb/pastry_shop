@@ -1,30 +1,38 @@
-import ProductCard from "../components/ProductCard"
-import Stripe from "stripe";
-
-// Fetch data from stripe api
-async function getStripeProducts() {
-  const stripe = new Stripe(process.env.STRIPE_SECRET ?? "", {
-    apiVersion: "2023-08-16",
-  });
-
-  const res = await stripe.prices.list({
-    expand: ["data.product"],
-  });
-
-  const prices = res.data;
-  return prices;
-}
+import Link from "next/link";
 
 export default async function Home() {
-  const products = await getStripeProducts();
-  // console.log(products);
   return (
-    <main className="p-4 flex flex-col">
-      <div className="max-w-[1000px] w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {products.map((product, productId) => {
-          return <ProductCard key={productId} product={product} />;
-        })}
+    <div className="block sm:flex justify-center items-center sm:pt-20 sm:pb-14">
+      {/* Left side */}
+      <div className="max-w-md mx-auto mr-0 px-6 py-6 items-center">
+        <span className="text-6xl md:text-7xl text-justify mb-4">
+          Delight in <span className="text-yellow-500">Every</span> Bite at Your
+          Bakery
+        </span>
+        <h1 className="text-lg items-center pt-4">
+          Indulge in the sweet symphony of delightful creations: your one-stop
+          pastry wonderland
+        </h1>
+        <div className="mt-4 flex">
+          <Link href="/products">
+            <button className="p-4 px-6 bg-yellow-500 hover:bg-opacity-80 rounded-full">
+              Shop All
+            </button>
+          </Link>
+          <Link href="/about">
+            <button className="p-4 text-slate-500 duration-100 hover:text-black">
+              About us
+            </button>
+          </Link>
+        </div>
+       
       </div>
-    </main>
+
+      {/* Right side */}
+      <div className="max-w-md md:ml-6 mx-auto flex justify-center px-2 sm:px-4">
+        <img src="/heropic.jpg" alt="Hero Image" className="w-92 h-auto" />
+      </div>
+    </div>
+
   );
 }

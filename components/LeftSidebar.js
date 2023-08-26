@@ -1,6 +1,5 @@
-import React from "react";
+import Link from "next/link";
 import { LiaTimesSolid } from "react-icons/lia";
-
 
 export default function LeftSidebar({ leftMenuOpen, toggleSidebar }) {
   return (
@@ -16,12 +15,16 @@ export default function LeftSidebar({ leftMenuOpen, toggleSidebar }) {
       >
         <LiaTimesSolid />
       </button>
-      <ul className="">
-        <li className="px-6 py-2 hover:bg-gray-200 cursor-pointer">home</li>
-        <li className="px-6 py-2 hover:bg-gray-200 cursor-pointer">
-          collections
-        </li>
-        <li className="px-6 py-2 hover:bg-gray-200 cursor-pointer">about</li>
+      <ul className="" onClick={toggleSidebar}>
+        <Link href={"/"}>
+          <li className="px-6 py-2 hover:bg-gray-200 cursor-pointer">home</li>
+        </Link>
+        <Link href={"/products"}>
+          <li className="px-6 py-2 hover:bg-gray-200 cursor-pointer">products</li>
+        </Link>
+        <Link href={"/about"}>
+          <li className="px-6 py-2 hover:bg-gray-200 cursor-pointer">about</li>
+        </Link>
       </ul>
     </div>
   );
