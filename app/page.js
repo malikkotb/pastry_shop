@@ -15,7 +15,7 @@ export default async function Home() {
         </h1>
         <div className="mt-4 flex">
           <Link href="/products">
-            <button className="p-4 px-6 bg-yellow-500 hover:bg-opacity-80 rounded-full">
+            <button className="p-4 px-6 bg-yellow-500 bg-opacity-80 hover:bg-opacity-100 rounded-full">
               Shop All
             </button>
           </Link>

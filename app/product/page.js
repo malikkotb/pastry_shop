@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import useCart from "../(store)/store";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { PiPlusThin } from "react-icons/pi";
 import { PiMinusThin } from "react-icons/pi";
 
@@ -14,10 +16,18 @@ export default function ProductPage({ searchParams }) {
 
   // the current product: (from Zustand store)
   // console.log(product);
-
+  
   if (!product?.name) {
     window.location.href = "/";
   }
+
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   if (!product?.name) {
+  //     router.push("/");
+  //   }
+  // }, [product]);
 
   function handleAddItemToCart() {
     const newItem = {
@@ -45,7 +55,7 @@ export default function ProductPage({ searchParams }) {
         <div className="flex flex-col gap-2 p-4 md:ml-4">
           <h3 className="text-2xl">{name}</h3>
           <p className="text-xl text-slate-700">€{cost / 100}.00</p>
-          <button onClick={handleAddItemToCart} className="bg-black text-white text-sm px-3 py-2">
+          <button onClick={handleAddItemToCart} className="bg-black text-white hover:bg-opacity-80 text-sm px-3 py-2">
             Add to cart
           </button>
           <br />

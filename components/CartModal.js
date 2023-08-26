@@ -1,26 +1,33 @@
+"use client";
 import useCart from "../app/(store)/store";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { FaTrash } from "react-icons/fa";
 import { LiaTimesSolid } from "react-icons/lia";
 
 export default function CartModal({ openModal, closeModal }) {
   const cartItems = useCart((state) => state.cart);
-  const router = useRouter()
-  
-  async function checkout() {
-    const lineItems = cartItems.map(cartItem => {
-        return {
-            price: cartItem.price_id,
-            quantity: 1
-        }
-    })
+  const removeItemFromCart = useCart((state) => state.removeItemFromCart);
 
-    const res = await fetch('/api/checkout', {
-        method: 'POST',
-        body: JSON.stringify({ lineItems })
-    })
-    const data = await res.json()
-    router.push(data.session.url)
+  const router = useRouter();
+
+  async function checkout() {
+    const lineItems = cartItems.map((cartItem) => {
+      return {
+        price: cartItem.price_id,
+        quantity: 1,
+      };
+    });
+
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      body: JSON.stringify({ lineItems }),
+    });
+    const data = await res.json();
+    router.push(data.session.url);
+  }
+
+  function handleRemoveItemFromCart(itemIndex) {
+    removeItemFromCart({ itemIndex: itemIndex });
   }
 
   return (
@@ -53,7 +60,12 @@ export default function CartModal({ openModal, closeModal }) {
                     <h2>{cartItem.name}</h2>
                     <h2>{cartItem.cost / 100}€</h2>
                   </div>
-                  <p className="text-sm text-gray-700">Quantity: 1</p>
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm text-gray-700">Quantity: 1</p>
+                    <button className="z-100" onClick={() => handleRemoveItemFromCart(itemIndex)}>
+                      <FaTrash className="hover:text-red-600 cursor-pointer duration-0" />
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -63,10 +75,22 @@ export default function CartModal({ openModal, closeModal }) {
       <div className="">
         <div className="flex justify-between p-4 pb-0">
           <p className="uppercase">Subtotal</p>
-          <p className="">{cartItems.reduce((total, item) => total + (item.quantity * item.cost), 0) / 100}€</p>
+          <p className="">
+            {cartItems.reduce(
+              (total, item) => total + item.quantity * item.cost,
+              0
+            ) / 100}
+            €
+          </p>
         </div>
         <div className="text-center p-4">
-          <button onClick={checkout} disabled={cartItems.length === 0} className={`bg-black text-white hover:bg-opacity-90 w-full p-2 border cursor-pointer ${cartItems.length === 0 ? 'disabled:cursor-not-allowed' : ''}`}>
+          <button
+            onClick={checkout}
+            disabled={cartItems.length === 0}
+            className={`bg-black text-white hover:bg-opacity-90 w-full p-2 border cursor-pointer ${
+              cartItems.length === 0 ? "disabled:cursor-not-allowed" : ""
+            }`}
+          >
             Check Out
           </button>
         </div>
