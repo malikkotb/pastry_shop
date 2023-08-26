@@ -1,6 +1,6 @@
-<img width="1201" alt="Screenshot 2023-08-26 at 13 36 30" src="https://github.com/malikkotb/pastry_shop/assets/50169361/cc65da5a-3b76-42fc-ba27-debd51ddedae"># Full-Stack E-Commerce Website for a Pastry Shop
+# Full-Stack E-Commerce Website for a Pastry Shop
 
-**This project is deployed and accessible at [https://tiny-cat-4b4dc8.netlify.app/](https://tiny-cat-4b4dc8.netlify.app/).**
+**This project is deployed and accessible at [this link](https://tiny-cat-4b4dc8.netlify.app/).**
 
 <img width="1201" alt="Screenshot 2023-08-26 at 13 36 30" src="https://github.com/malikkotb/pastry_shop/assets/50169361/e1a272cc-fe87-4a73-b055-b40c43a08152">
 
