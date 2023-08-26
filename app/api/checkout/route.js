@@ -3,11 +3,7 @@ import Stripe from "stripe";
 
 // the backend route
 export async function POST(request) {
-  let targetUrl = "https://main--tiny-cat-4b4dc8.netlify.app";
-  const currentUrl = window.location.href;
-  if (currentUrl.includes("localhost")) {
-    targetUrl = "http://localhost:3000";
-  }
+  
 
   if (request.method !== "POST") {
     return new Response("Error Method not POST", {
@@ -30,8 +26,8 @@ export async function POST(request) {
     });
 
     const session = await stripe.checkout.sessions.create({
-      success_url: `${targetUrl}/success`,
-      cancel_url: `${targetUrl}/cancel`,
+      success_url: `http://localhost:3000/success`,
+      cancel_url: `http://localhost:3000/cancel`,
       line_items: body.lineItems,
       mode: "payment",
     });
